@@ -166,7 +166,7 @@
 //  I  04014080,3
 //  I  04014083,6
 
-
+#include <time.h>
 #include "pub_tool_basics.h"
 #include "pub_tool_tooliface.h"
 #include "pub_tool_libcassert.h"
@@ -454,22 +454,31 @@ static Int   events_used = 0;
 
 static VG_REGPARM(2) void trace_instr(Addr addr, SizeT size)
 {
-   VG_(printf)("I  %08lx,%lu\n", addr, size);
+   // VG_(printf)("I  %08lx,%lu\n", addr, size);
 }
 
 static VG_REGPARM(2) void trace_load(Addr addr, SizeT size)
 {
-   VG_(printf)(" L %08lx,%lu\n", addr, size);
+   //struct timespec ts;
+   //clock_gettime(CLOCK_BOOTTIME, &ts);
+   VG_(printf)("mem,0,%p,0,0,0,1,%lu\n", /*ts.tv_nsec,*/ addr, size);
+   //VG_(printf)(" L %08lx,%lu\n", addr, size);
 }
 
 static VG_REGPARM(2) void trace_store(Addr addr, SizeT size)
 {
-   VG_(printf)(" S %08lx,%lu\n", addr, size);
+   //struct timespec ts;
+   //clock_gettime(CLOCK_BOOTTIME, &ts);
+   VG_(printf)("mem,0,%p,0,0,0,2,%lu\n", /*ts.tv_nsec*/ addr, size);
+   //VG_(printf)(" S %08lx,%lu\n", addr, size);
 }
 
 static VG_REGPARM(2) void trace_modify(Addr addr, SizeT size)
 {
-   VG_(printf)(" M %08lx,%lu\n", addr, size);
+   //struct timespec ts;
+   //clock_gettime(CLOCK_BOOTTIME, &ts);
+   VG_(printf)("mem,0,%p,0,0,0,3,%lu\n", /*ts.tv_nsec*/ addr, size);
+   //VG_(printf)(" M %08lx,%lu\n", addr, size);
 }
 
 
